@@ -15,6 +15,10 @@ body{
     min-height: calc(100vh - 127px);
 }
 
+.height-navbar{
+    min-height: calc(100vh - 127px - 48px);
+}
+
 #logo{
     text-decoration: none;
     color: white;
@@ -22,4 +26,24 @@ body{
 
 .line-height{
     line-height: 1.5em;
+}
+
+.navbar-nav li:hover{
+    background-color: #007bff !important;
+}
+
+.navbar-item{
+    font-size: 0.8rem;
+}
+
+.navbar-item:hover a{
+    color: white !important;
+}
+
+.active{
+    color: #007bff !important;
+}
+
+.navbar-item{
+    min-height: 48px;
 }
