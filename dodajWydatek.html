@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>HomeBudget</title>
+    <meta name="description" content="Program pomagający zapanować nad finansami domowymi">
+	<meta name="keywords" content="finanse, budżet, pieniądze, bilans, saldo, wydatki, przychody, zakupy, oszczędności">
+	<meta name="author" content="Bartłomiej Zagórski">
+    <meta http-equiv="X-Ua-Compatible" content="IE=edge">
+    <!-- bootstrap css-->
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <!--font awesome-->
+    <script src="js/all.min.js"></script>
+    <!--google fonts-->
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400&display=swap" rel="stylesheet">
+    <!--main css-->
+    <link rel="stylesheet" href="./css/main.css">
+
+    <script src="defDate.js"></script>
+</head>
+<body>
+    
+    <header>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col py-2 bg-primary">
+                    <h1 class="text-capitalize text-light text-center">
+                        <a href="index.html" id="logo">
+                            <i class="fas fa-house-user fa-2x"></i><strong>HomeBudget</strong>
+                        </a>
+                    </h1>
+                    <p class="small text-center my-0">
+                        Pieniądze to nie wszystko, ale wszystko bez pieniędzy to nic.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="navbar navbar-light bg-light p-0 navbar-expand-lg main-navbar">
+        <button type="button" class="navbar-toggler m-1 order-first" data-toggle="collapse" data-target="#navbarLinks">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse " id="navbarLinks">
+            <ul class="navbar-nav mr-auto">
+                <li class="navbar-item pt-2">
+                    <a href="menuGlowne.html" class="nav-link"><i class="fas fa-house-user mx-1"></i>Strona Główna</a>
+                </li>
+                <li class="navbar-item pt-2">
+                    <a href="dodajPrzychod.html" class="nav-link"><i class="fas fa-dollar-sign mx-1"></i>Dodaj Przychód</a>
+                </li>
+                <li class="navbar-item pt-2">
+                    <a href="dodajWydatek.html" class="nav-link active"><i class="fas fa-shopping-cart mx-1"></i>Dodaj Wydatek</a>
+                </li>
+                <li class="navbar-item pt-2">
+                    <a href="przegladajBilans.html" class="nav-link"><i class="far fa-chart-bar mx-1"></i>Przeglądaj Bilans</a>
+                </li>
+                <li class="navbar-item pt-2">
+                    <a href="ustwienia.html" class="nav-link"><i class="fas fa-cog mx-1"></i>Ustawienia</a>
+                </li>
+                <li class="navbar-item pt-2">
+                    <a href="index.html" class="nav-link"><i class="fas fa-sign-out-alt mx-1"></i>Wyloguj się</a>
+                </li>
+            </ul>
+        </div>
+        <div class="navbar-item text-primary mr-3 pt-1">
+            <p class="m-1 pt-2"><i class="fas fa-user mr-1 mb-0"></i>Zalogowany jako: Bartek</p>
+        </div>
+    </nav>
+
+    <main>
+        <article id="main-content" class="py-3 height-navbar">
+            <div class="container">
+                <div class="row align-items-start justify-content-center">
+                    <div class="col-md-8 mx-auto py-4">
+                        <div class="card border-primary">
+                            <div class="card-header bg-primary py-2 text-light text-center text-capitalize">
+                                <h3 class="h5 m-0"><i class="fas fa-shopping-cart mx-1"></i>dodaj wydatek</h3>
+                            </div>
+                            <div class="card-body border-primary py-3">
+                                <form>
+                                    <div class="input-group mt-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text width d-flex justify-content-center"><i class="far fa-money-bill-alt"></i></span>
+                                        </div>
+                                        <input type="number" name="amount" id="amount" step="0.01" class="form-control" placeholder="podaj kwotę" onfocus="this.placeholder=''" onblur="this.placeholder='podaj kwotę'" required>
+                                    </div>
+                                    <div class="input-group mt-3">
+                                        <div class="input-group-prepend d-flex justify-content-center">
+                                            <span class="input-group-text width d-flex justify-content-center"><i class="far fa-calendar"></i></span>
+                                        </div>
+                                        <input type="date" name="date" id="date" class="form-control" required>
+                                    </div>
+                                    <div class="input-group mt-3">
+                                        
+                                        <select class="form-control" required>
+							
+                                            <option value="" disabled selected hidden>Wybierz Sposób Płatności</option>
+                                            
+                                            <option value="1">Gotówka</option>
+                                            <option value="2">Karta debetowa</option>
+                                            <option value="3">Karta kredytowa</option>
+                                           
+                                        </select>
+                                    </div>
+                                    <div class="input-group mt-3">
+                                        
+                                        <select class="form-control" required>
+							
+                                            <option value="" disabled selected hidden>Wybierz Kategorię</option>
+                                            
+                                            <option value="1">Jedzenie</option>
+                                            <option value="2">Mieszkanie</option>
+                                            <option value="3">Transport</option>
+                                            <option value="4">Telekomunikacja</option>
+
+                                            <option value="5">Opieka zdrowotna</option>
+                                            <option value="6">Ubranie</option>
+                                            <option value="7">Higiena</option>
+                                            <option value="8">Dzieci</option>
+
+                                            <option value="9">Rozrywka</option>
+                                            <option value="10">Wycieczka</option>
+                                            <option value="11">Szkolenia</option>
+                                            <option value="12">Książki</option>
+
+                                            <option value="13">Oszczędności</option>
+                                            <option value="14">Złota jesień</option>
+                                            <option value="15">Spłata długów</option>
+                                            <option value="16">Darowizna</option>
+                                            <option value="17">Inne wydatki</option>
+                                           
+                                        </select>
+                                    </div>
+                                    <div class="input-group mt-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text width d-flex justify-content-center"><i class="far fa-edit"></i></span>
+                                        </div>
+                                        <input type="text" name="comment" id="comment" class="form-control" placeholder="komentarz" onfocus="this.placeholder=''" onblur="this.placeholder='komentarz'">
+                                    </div>
+                                    <div class="d-flex justify-content-around">
+                                        <button type="submit" class="btn btn-outline-success mt-3 py-1"><i class="fas fa-plus-circle mr-2"></i>dodaj</button>
+                                        <a href="menuGlowne.html" class="btn btn-outline-danger mt-3 py-1">
+                                            <i class="fas fa-times-circle mr-2"></i>anuluj
+                                        </a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <!-- jQuery-->
+    <script src="./js/jquery-3.5.1.min.js"></script>
+    <!--bootstrap js-->
+    <script src="./js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
