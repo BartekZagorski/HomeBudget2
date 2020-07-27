@@ -47,3 +47,7 @@ body{
 .navbar-item{
     min-height: 48px;
 }
+
+.width{
+    min-width: 46px;
+}
