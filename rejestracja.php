@@ -1,3 +1,7 @@
+<?php
+	session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -28,7 +32,7 @@
 				<div class="row" style="min-height: 131px;">
 					<div class="col py-2 bg-primary">
 						<h1 class="text-capitalize text-light text-center mb-0">
-							<a href="index.html" id="logo"><i class="icon-home brand"></i><strong>HomeBudget</strong></a>
+							<a href="index.php" id="logo"><i class="icon-home brand"></i><strong>HomeBudget</strong></a>
 						</h1>
 						<p class="small text-center my-0">
 							Pieniądze to nie wszystko, ale wszystko bez pieniędzy to nic.
@@ -47,21 +51,49 @@
 									<h3 class="h5 m-0">Rejestracja</h3>
 								</div>
 								<div class="card-body border-primary py-3">
-									<form>
+									<form action="register.php" method="post">
 										<div class="input-group">
 											<div class="input-group-prepend">
 												<span class="input-group-text px-2">
 													<i class="icon-mail"></i>
 												</span>
 											</div>
-											<input type="email" name="email" id="email" class="form-control" placeholder="email" onfocus="this.placeholder=''" onblur="this.placeholder='email'" required>
+											<input type="email" name="email" id="email" class="form-control" placeholder="email" onfocus="this.placeholder=''" onblur="this.placeholder='email'" 
+												<?php 
+													if (isset($_SESSION['allTestsPassed']))
+													{
+														echo 'value = "'.$_SESSION['given_email'].'"';
+													}
+												?>
+											required>
 										</div>
+										<?php
+													if (isset($_SESSION['error_email']))
+													{
+														echo "<p class=\"mt-1 text-danger small\">{$_SESSION['error_email']}</p>";
+														unset($_SESSION['error_email']);
+													}
+										?>
 										<div class="input-group mt-3">
 											<div class="input-group-prepend">
 												<span class="input-group-text px-2"><i class="icon-user"></i></span>
 											</div>
-											<input type="text" name="login" id="login" class="form-control" placeholder="login" onfocus="this.placeholder=''" onblur="this.placeholder='login'" required>
+											<input type="text" name="login" id="login" class="form-control" placeholder="login" onfocus="this.placeholder=''" onblur="this.placeholder='login'" 
+												<?php 
+													if (isset($_SESSION['allTestsPassed']))
+													{
+														echo 'value = "'.$_SESSION['given_login'].'"';
+													}
+												?>
+											required>
 										</div>
+										<?php
+													if (isset($_SESSION['error_login']))
+													{
+														echo "<p class=\"mt-1 text-danger small\">{$_SESSION['error_login']}</p>";
+														unset($_SESSION['error_login']);
+													}
+										?>
 										<div class="input-group mt-3">
 											<div class="input-group-prepend">
 												<span class="input-group-text px-2"><i class="icon-lock"></i></span>
@@ -76,6 +108,9 @@
 										</div>
 										<button type="submit" class="btn btn-outline-primary btn-block mt-3 py-2"><i class="icon-user-plus mr-2"></i>Zarejestruj się</button>
 									</form>
+									<?php
+										if (isset($_SESSION['allTestsPassed'])) unset($_SESSION['allTestsPassed']);
+									?>
 								</div>
 								<div class="card-footer p bg-transparent border-primary">
 									<p class="mb-1 text-center">Masz już konto?</p>

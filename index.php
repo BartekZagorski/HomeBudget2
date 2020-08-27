@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -24,7 +28,7 @@
 			<div class="row" style="min-height: 131px;">
 				<div class="col py-2 bg-primary">
 					<h1 class="text-capitalize text-light text-center mb-0">
-						<a href="index.html" id="logo"><i class="icon-home brand"></i><strong>HomeBudget</strong></a>
+						<a href="index.php" id="logo"><i class="icon-home brand"></i><strong>HomeBudget</strong></a>
 					</h1>
 					<p class="small text-center my-0">
 						Pieniądze to nie wszystko, ale wszystko bez pieniędzy to nic.
@@ -59,7 +63,7 @@
                                 <p class="text-center text-light mb-1 my-2">
                                     Jesteś nowym użytkownikiem?
                                 </p>
-                                <a href="rejestracja.html" class="btn btn-danger py-3 btn-block"><i class="icon-user-plus mr-2"></i>Zarejestruj się</a>
+                                <a href="rejestracja.php" class="btn btn-danger py-3 btn-block"><i class="icon-user-plus mr-2"></i>Zarejestruj się</a>
                             </div>
 
                         </div>
