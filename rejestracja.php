@@ -118,7 +118,14 @@
 											<div class="input-group-prepend">
 												<span class="input-group-text px-2"><i class="icon-lock"></i></span>
 											</div>
-											<input type="password" name="password-confirm" id="password-confirm" class="form-control" placeholder="powtórz hasło" onfocus="this.placeholder=''" onblur="this.placeholder='powtórz hasło'" required>
+											<input type="password" name="password-confirm" id="password-confirm" class="form-control" placeholder="powtórz hasło" onfocus="this.placeholder=''" onblur="this.placeholder='powtórz hasło'" 
+											<?php
+												if (isset($_SESSION['allTestsPassed']) && !$_SESSION['allTestsPassed'])
+												{
+													echo 'value = "'.$_SESSION['given_pass_confirm'].'"';
+												}
+											?>
+											required>
 										</div>
 										<button type="submit" class="btn btn-outline-primary btn-block mt-3 py-2"><i class="icon-user-plus mr-2"></i>Zarejestruj się</button>
 									</form>
