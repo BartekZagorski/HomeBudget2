@@ -33,13 +33,47 @@ if (isset($_POST['email'])) {
             $_SESSION['error_login']="Login musi posiadać od 3 do 20 znaków";
         }
     
-        // Let nick has only alphaumerical characters without national chars
+        // Let login has only alphaumerical characters without national chars
         if (ctype_alnum($login)==false)
         {
             $_SESSION['allTestsPassed'] = false;
             $_SESSION['error_login']="Login może składać się tylko z liter i cyfr bez polskich znaków.";
         }
         $_SESSION['given_login']=$login;
+
+    //end of ogin tests
+
+    //password tests
+
+        //sprawdźmy poprawność hasła
+        $password = $_POST['password'];
+        $confirmPassword = $_POST['password-confirm'];
+    
+        //let password has between 8 and 20 characters
+    
+        if (strlen($password)<8 || strlen($password)>20)
+        {
+            $_SESSION['allTestsPassed'] = false;
+            $_SESSION['error_pass'] = "Hasło musi zawierać od 8 do 20 znaków";
+        }
+
+        $_SESSION['given_pass'] = $password;
+    
+   /*     //sprawdźmy czy hasło1 i hasło2 są takie same
+    
+        if ($haslo1 != $haslo2)
+        {
+            $wszystko_OK = false;
+            $_SESSION['e_pass'] ="Podane hasła nie są identyczne";
+        }
+    
+        $haslo_hash = password_hash($haslo1, PASSWORD_DEFAULT);*/
+
+
+
+
+
+    //end of password tests
 
 
     if (!$_SESSION['allTestsPassed']) header('Location: rejestracja.php');

@@ -60,7 +60,7 @@
 											</div>
 											<input type="email" name="email" id="email" class="form-control" placeholder="email" onfocus="this.placeholder=''" onblur="this.placeholder='email'" 
 												<?php 
-													if (isset($_SESSION['allTestsPassed']))
+													if (isset($_SESSION['allTestsPassed']) && !$_SESSION['allTestsPassed'])
 													{
 														echo 'value = "'.$_SESSION['given_email'].'"';
 													}
@@ -80,7 +80,7 @@
 											</div>
 											<input type="text" name="login" id="login" class="form-control" placeholder="login" onfocus="this.placeholder=''" onblur="this.placeholder='login'" 
 												<?php 
-													if (isset($_SESSION['allTestsPassed']))
+													if (isset($_SESSION['allTestsPassed']) && !$_SESSION['allTestsPassed'])
 													{
 														echo 'value = "'.$_SESSION['given_login'].'"';
 													}
@@ -98,8 +98,22 @@
 											<div class="input-group-prepend">
 												<span class="input-group-text px-2"><i class="icon-lock"></i></span>
 											</div>
-											<input type="password" name="password" id="password" class="form-control" placeholder="hasło" onfocus="this.placeholder=''" onblur="this.placeholder='hasło'" required>
+											<input type="password" name="password" id="password" class="form-control" placeholder="hasło" onfocus="this.placeholder=''" onblur="this.placeholder='hasło'"
+												<?php 
+														if (isset($_SESSION['allTestsPassed']) && !$_SESSION['allTestsPassed'])
+														{
+															echo 'value = "'.$_SESSION['given_pass'].'"';
+														}
+												?>
+											required>
 										</div>
+										<?php
+													if (isset($_SESSION['error_pass']))
+													{
+														echo "<p class=\"mt-1 text-danger small\">{$_SESSION['error_pass']}</p>";
+														unset($_SESSION['error_pass']);
+													}
+										?>
 										<div class="input-group mt-3">
 											<div class="input-group-prepend">
 												<span class="input-group-text px-2"><i class="icon-lock"></i></span>
