@@ -48,6 +48,17 @@ if (isset($_POST['email'])) {
         //sprawdźmy poprawność hasła
         $password = $_POST['password'];
         $confirmPassword = $_POST['password-confirm'];
+
+
+        //Let's check whether a password is identical that confirmPassword
+
+        if ($password != $confirmPassword)
+        {
+            $_SESSION['allTestsPassed'] = false;
+            $_SESSION['error_pass'] = "Podane hasła nie są identyczne";
+        }
+
+        $_SESSION['given_pass_confirm'] = $confirmPassword;
     
         //let password has between 8 and 20 characters
     
@@ -59,15 +70,9 @@ if (isset($_POST['email'])) {
 
         $_SESSION['given_pass'] = $password;
     
-   /*     //sprawdźmy czy hasło1 i hasło2 są takie same
+
     
-        if ($haslo1 != $haslo2)
-        {
-            $wszystko_OK = false;
-            $_SESSION['e_pass'] ="Podane hasła nie są identyczne";
-        }
-    
-        $haslo_hash = password_hash($haslo1, PASSWORD_DEFAULT);*/
+        //$haslo_hash = password_hash($haslo1, PASSWORD_DEFAULT);
 
 
 
