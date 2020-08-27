@@ -17,8 +17,9 @@ if (isset($_POST['email'])) {
     {
         $_SESSION['allTestsPassed'] = false;
         $_SESSION['error_email']="Podany adres email jest niepoprawny";
-        $_SESSION['given_email'] = $email;
     }
+
+    $_SESSION['given_email'] = $email;
 
     //end of email tests
 
@@ -70,20 +71,64 @@ if (isset($_POST['email'])) {
 
         $_SESSION['given_pass'] = $password;
     
-
-    
-        //$haslo_hash = password_hash($haslo1, PASSWORD_DEFAULT);
-
-
-
-
-
     //end of password tests
 
+    //connect to database -->
 
-    if (!$_SESSION['allTestsPassed']) header('Location: rejestracja.php');
+
+    if (!$_SESSION['allTestsPassed']){
+        header('Location: rejestracja.php');
+    } else {
+        require_once "dbconnect.php";
+
+        $query = $dbConnection->prepare('SELECT id FROM users WHERE email = :email');
+        $query->bindValue(':email', $email, PDO::PARAM_STR);
+        $query->execute();
+
+        $fetchedID = $query->fetch();
+
+        if ($fetchedID) {
+            $_SESSION['allTestsPassed'] = false;
+            $_SESSION['error_email'] = "Istnieje konto o podanym adresie email";
+        }
+
+        $query = $dbConnection->prepare('SELECT id FROM users WHERE login = :login');
+        $query->bindValue(':login', $login, PDO::PARAM_STR);
+        $query->execute();
+
+        $fetchedID = $query->fetch();
+
+        if ($fetchedID) {
+            $_SESSION['allTestsPassed'] = false;
+            $_SESSION['error_login'] = "Istnieje konto o podanym loginie";
+        }
 
 
+        if (!$_SESSION['allTestsPassed']){
+            header('Location: rejestracja.php');
+            exit();
+        } else {
+            unset($_SESSION['given_email']);
+            unset($_SESSION['given_login']);
+            unset($_SESSION['given_pass']);
+            unset($_SESSION['given_pass_confirm']);
+    
+            $passwordHash = password_hash($haslo1, PASSWORD_DEFAULT);
+    
+            
+        }
+    }
+
+
+    
+
+
+
+
+
+
+
+    
 
 
 
@@ -91,7 +136,7 @@ if (isset($_POST['email'])) {
 
 
 }   else {
-    header('Location: index.php');
-    exit();
-}
+        header('Location: index.php');
+        exit();
+    }
 ?>
