@@ -113,27 +113,47 @@ if (isset($_POST['email'])) {
             unset($_SESSION['given_pass']);
             unset($_SESSION['given_pass_confirm']);
     
-            $passwordHash = password_hash($haslo1, PASSWORD_DEFAULT);
-    
-            
+            $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+
+            //adding new record to table users
+            $query = $dbConnection->prepare('INSERT INTO users VALUES (NULL, :login, :pass, :email)');
+            $query->bindValue(':login', $login, PDO::PARAM_STR);
+            $query->bindValue(':pass', $passwordHash, PDO::PARAM_STR);
+            $query->bindValue(':email', $email, PDO::PARAM_STR);
+            $query->execute();
+
+            //fetch just registerred user id
+
+            $query = $dbConnection->prepare('SELECT id FROM users WHERE login = :login');
+            $query->bindValue(':login', $login, PDO::PARAM_STR);
+            $query->execute();
+
+            $justRegisterredUser = $query->fetch(); 
+
+            $justRegisterredUserId = $justRegisterredUser['id'];
+
+            //adding new records to table incomesCattegoriesAssignedToUser from table incomesCattegoriesDefault
+
+            $query = $dbConnection->prepare('INSERT INTO incomes_cattegories_assigned_to_users SELECT NULL, :id, name FROM incomes_cattegories_default');
+            $query->bindValue(':id', $justRegisterredUserId, PDO::PARAM_INT);
+            $query->execute();
+
+            //adding new records to table paymentMethodsAssignedToUser from table paymentMethodsDefault
+
+            $query = $dbConnection->prepare('INSERT INTO payment_method_assigned_to_user SELECT NULL, :id, name FROM payment_method_default');
+            $query->bindValue(':id', $justRegisterredUserId, PDO::PARAM_INT);
+            $query->execute();
+
+            //adding new records to table expensesCattegoriesAssignedToUser from table expensesCattegoriesDefault
+
+            $query = $dbConnection->prepare('INSERT INTO expenses_cattegories_assigned_to_users SELECT NULL, :id, name FROM expenses_cattegories_default');
+            $query->bindValue(':id', $justRegisterredUserId, PDO::PARAM_INT);
+            $query->execute();
+
+            header ('Location: logowanie.html');
+            exit();          
         }
     }
-
-
-    
-
-
-
-
-
-
-
-    
-
-
-
-
-
 
 }   else {
         header('Location: index.php');
