@@ -68,11 +68,11 @@
 											required>
 										</div>
 										<?php
-													if (isset($_SESSION['error_email']))
-													{
-														echo "<p class=\"mt-1 text-danger small\">{$_SESSION['error_email']}</p>";
-														unset($_SESSION['error_email']);
-													}
+											if (isset($_SESSION['error_email']))
+											{
+												echo "<p class=\"mt-1 text-danger small\">{$_SESSION['error_email']}</p>";
+												unset($_SESSION['error_email']);
+											}
 										?>
 										<div class="input-group mt-3">
 											<div class="input-group-prepend">
@@ -88,11 +88,11 @@
 											required>
 										</div>
 										<?php
-													if (isset($_SESSION['error_login']))
-													{
-														echo "<p class=\"mt-1 text-danger small\">{$_SESSION['error_login']}</p>";
-														unset($_SESSION['error_login']);
-													}
+											if (isset($_SESSION['error_login']))
+											{
+												echo "<p class=\"mt-1 text-danger small\">{$_SESSION['error_login']}</p>";
+												unset($_SESSION['error_login']);
+											}
 										?>
 										<div class="input-group mt-3">
 											<div class="input-group-prepend">
@@ -100,19 +100,19 @@
 											</div>
 											<input type="password" name="password" id="password" class="form-control" placeholder="hasło" onfocus="this.placeholder=''" onblur="this.placeholder='hasło'"
 												<?php 
-														if (isset($_SESSION['allTestsPassed']) && !$_SESSION['allTestsPassed'])
-														{
-															echo 'value = "'.$_SESSION['given_pass'].'"';
-														}
+													if (isset($_SESSION['allTestsPassed']) && !$_SESSION['allTestsPassed'])
+													{
+														echo 'value = "'.$_SESSION['given_pass'].'"';
+													}
 												?>
 											required>
 										</div>
 										<?php
-													if (isset($_SESSION['error_pass']))
-													{
-														echo "<p class=\"mt-1 text-danger small\">{$_SESSION['error_pass']}</p>";
-														unset($_SESSION['error_pass']);
-													}
+											if (isset($_SESSION['error_pass']))
+											{
+												echo "<p class=\"mt-1 text-danger small\">{$_SESSION['error_pass']}</p>";
+												unset($_SESSION['error_pass']);
+											}
 										?>
 										<div class="input-group mt-3">
 											<div class="input-group-prepend">
