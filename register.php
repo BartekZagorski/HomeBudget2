@@ -150,7 +150,8 @@ if (isset($_POST['email'])) {
             $query->bindValue(':id', $justRegisterredUserId, PDO::PARAM_INT);
             $query->execute();
 
-            header ('Location: logowanie.html');
+            $_SESSION['successfulRegistration'] = true;
+            header ('Location: witamy.php');
             exit();          
         }
     }
