@@ -1,5 +1,10 @@
 <?php
 	session_start();
+
+	if (isset($_SESSION['loggedInUserId'])) {
+        header('Location: menuGlowne.php');
+        exit();
+    }
 ?>
 
 <!DOCTYPE html>
@@ -135,7 +140,7 @@
 								</div>
 								<div class="card-footer p bg-transparent border-primary">
 									<p class="mb-1 text-center">Masz już konto?</p>
-									<a href="logowanie.html" class="btn btn-success py-2 my-1 btn-block"><i class="icon-login mr-2"></i>Zaloguj się</a>
+									<a href="logowanie.php" class="btn btn-success py-2 my-1 btn-block"><i class="icon-login mr-2"></i>Zaloguj się</a>
 								</div>
 							</div>
 						</div>
