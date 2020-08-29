@@ -2,7 +2,7 @@
     session_start();
     
     if (!isset($_POST['login'])) {
-        header('Location: logowanie.php');
+        header('Location: index.php');
         exit();
     }
 

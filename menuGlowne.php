@@ -24,7 +24,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400&display=swap" rel="stylesheet">  
 	<!--[if lt IE 9]>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-	<![endif]-->
+    <![endif]-->
+
+
 </head>
 <body>
 
@@ -68,7 +70,7 @@ require_once "temp.php";
                     <a href="ustwienia.html" class="nav-link"><i class="icon-cog mx-1"></i>Ustawienia</a>
                 </li>
                 <li class="navbar-item pt-2">
-                    <a href="index.php" class="nav-link"><i class="icon-logout mx-1"></i>Wyloguj się</a>
+                    <a href="index.php" class="nav-link" id="logout-link"><i class="icon-logout mx-1"></i>Wyloguj się</a>
                 </li>
             </ul>
         </div>
@@ -89,6 +91,16 @@ require_once "temp.php";
 
     <script src="./js/jquery-3.5.1.min.js"></script>
     <script src="./js/bootstrap.bundle.min.js"></script>
+
+
+    <script>
+            $(document).ready(function(){
+                $("#logout-link").click(function()
+                    {
+                        $.post("logout.php")
+                    });
+                    });
+    </script>
 
 </body>
 </html>
