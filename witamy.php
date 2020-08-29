@@ -57,7 +57,7 @@ else {
                             </div>
                             <div class="card-body border-primary py-3">
                                 <p class="mb-4 mt-2 text-center">Rejestracja przebiegła pomyślnie. Możesz teraz przejść do logowania.</p>
-                                <a href="logowanie.html" class="btn btn-success py-2 my-1 btn-block"><i class="icon-login mr-2"></i>Zaloguj się</a>
+                                <a href="logowanie.php" class="btn btn-success py-2 my-1 btn-block"><i class="icon-login mr-2"></i>Zaloguj się</a>
                             </div>
 
                         </div>

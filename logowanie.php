@@ -1,3 +1,12 @@
+<?php
+    session_start();
+
+    if (isset($_SESSION['loggedInUserId'])) {
+        header('Location: menuGlowne.php');
+        exit();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -43,7 +52,7 @@
                                 <h3 class="h5 m-0">Logowanie</h3>
                             </div>
                             <div class="card-body border-primary py-3">
-                                <form>
+                                <form action="login.php" method="post">
                                     <div class="input-group mt-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text px-2"><i class="icon-user"></i></span>
@@ -57,6 +66,13 @@
                                         <input type="password" name="password" id="password" class="form-control" placeholder="hasło" onfocus="this.placeholder=''" onblur="this.placeholder='hasło'" required>
                                     </div>
                                     <button type="submit" class="btn btn-outline-primary btn-block mt-3 py-2"><i class="icon-login mr-2"></i>Zaloguj się</button>
+                                    <?php
+                                        if (isset($_SESSION['badAttempt']))
+                                        {
+                                            echo "<p> Niepoprawny login lub hasło </p>";
+                                            unset($_SESSION['badAttempt']);
+                                        }
+                                    ?>
                                 </form>
                             </div>
                             <div class="card-footer p bg-transparent border-primary">

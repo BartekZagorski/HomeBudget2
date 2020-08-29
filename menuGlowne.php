@@ -1,3 +1,11 @@
+<?php
+    session_start();
+    if (!isset($_SESSION['loggedInUserId'])) {
+        header('Location: index.php');
+        exit();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -19,8 +27,11 @@
 	<![endif]-->
 </head>
 <body>
-    
-    <header>
+
+<?php    
+require_once "temp.php"; 
+?> 
+<!-- <header>
         <div class="container-fluid">
             <div class="row" style="min-height: 131px;">
                 <div class="col py-2 bg-primary">
@@ -33,7 +44,7 @@
                 </div>
             </div>
         </div>
-    </header>
+    </header> -->
 
     <nav class="navbar navbar-light bg-light p-0 navbar-expand-lg main-navbar">
         <button type="button" class="navbar-toggler m-1 order-first" data-toggle="collapse" data-target="#navbarLinks">
@@ -42,7 +53,7 @@
         <div class="collapse navbar-collapse " id="navbarLinks">
             <ul class="navbar-nav mr-auto">
                 <li class="navbar-item pt-2">
-                    <a href="menuGlowne.html" class="nav-link active"><i class="icon-home-1 mx-1"></i>Strona Główna</a>
+                    <a href="menuGlowne.php" class="nav-link active"><i class="icon-home-1 mx-1"></i>Strona Główna</a>
                 </li>
                 <li class="navbar-item pt-2">
                     <a href="dodajPrzychod.html" class="nav-link"><i class="icon-dollar mx-1"></i>Dodaj Przychód</a>
@@ -62,7 +73,11 @@
             </ul>
         </div>
         <div class="navbar-item text-primary mr-3 pt-1">
-            <p class="m-1 pt-2"><i class="icon-user mr-1 mb-0"></i>Zalogowany jako: Bartek</p>
+            <p class="m-1 pt-2"><i class="icon-user mr-1 mb-0"></i>Zalogowany jako: 
+        <?php
+            echo $_SESSION['login'];
+        ?>
+        </p>
         </div>
     </nav>
 
