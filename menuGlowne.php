@@ -70,7 +70,7 @@ require_once "temp.php";
                     <a href="ustwienia.html" class="nav-link"><i class="icon-cog mx-1"></i>Ustawienia</a>
                 </li>
                 <li class="navbar-item pt-2">
-                    <a href="index.php" class="nav-link" id="logout-link"><i class="icon-logout mx-1"></i>Wyloguj się</a>
+                    <a  href="logout.php" class="nav-link" id="logout-link"><i class="icon-logout mx-1"></i>Wyloguj się</a>
                 </li>
             </ul>
         </div>
@@ -92,15 +92,6 @@ require_once "temp.php";
     <script src="./js/jquery-3.5.1.min.js"></script>
     <script src="./js/bootstrap.bundle.min.js"></script>
 
-
-    <script>
-            $(document).ready(function(){
-                $("#logout-link").click(function()
-                    {
-                        $.post("logout.php")
-                    });
-                    });
-    </script>
 
 </body>
 </html>
