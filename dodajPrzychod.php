@@ -1,3 +1,11 @@
+<?php
+    session_start();
+    if (!isset($_SESSION['loggedInUserId'])) {
+        header('Location: index.php');
+        exit();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -19,54 +27,13 @@
 	<![endif]-->
     <script src="defDate.js"></script>
 </head>
+
 <body>
+
+    <?php    
+    require_once "headerAndNavbar.php"; 
+    ?> 
     
-    <header>
-        <div class="container-fluid">
-            <div class="row" style="min-height: 131px;">
-                <div class="col py-2 bg-primary">
-                    <h1 class="text-capitalize text-light text-center mb-0">
-                        <a href="index.php" id="logo"><i class="icon-home brand"></i><strong>HomeBudget</strong></a>
-                    </h1>
-                    <p class="small text-center my-0">
-                        Pieniądze to nie wszystko, ale wszystko bez pieniędzy to nic.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <nav class="navbar navbar-light bg-light p-0 navbar-expand-lg main-navbar">
-        <button type="button" class="navbar-toggler m-1 order-first" data-toggle="collapse" data-target="#navbarLinks">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse " id="navbarLinks">
-            <ul class="navbar-nav mr-auto">
-                <li class="navbar-item pt-2">
-                    <a href="menuGlowne.html" class="nav-link"><i class="icon-home-1 mx-1"></i>Strona Główna</a>
-                </li>
-                <li class="navbar-item pt-2">
-                    <a href="dodajPrzychod.html" class="nav-link active"><i class="icon-dollar mx-1"></i>Dodaj Przychód</a>
-                </li>
-                <li class="navbar-item pt-2">
-                    <a href="dodajWydatek.html" class="nav-link"><i class="icon-basket mx-1"></i>Dodaj Wydatek</a>
-                </li>
-                <li class="navbar-item pt-2">
-                    <a href="przegladajBilans.html" class="nav-link"><i class="icon-chart-bar mx-1"></i>Przeglądaj Bilans</a>
-                </li>
-                <li class="navbar-item pt-2">
-                    <a href="ustwienia.html" class="nav-link"><i class="icon-cog mx-1"></i>Ustawienia</a>
-                </li>
-                <li class="navbar-item pt-2">
-                    <a href="index.php" class="nav-link"><i class="icon-logout mx-1"></i>Wyloguj się</a>
-                </li>
-            </ul>
-        </div>
-        <div class="navbar-item text-primary mr-3 pt-1">
-            <p class="m-1 pt-2"><i class="icon-user mr-1 mb-0"></i>Zalogowany jako: Bartek</p>
-        </div>
-    </nav>
-
     <main>
         <article id="main-content" class="py-3 height-navbar">
             <div class="container">
@@ -93,13 +60,9 @@
                                     <div class="input-group mt-3">
                                         
                                         <select class="form-control" required>
-							
-                                            <option value="" disabled selected hidden>Wybierz Kategorię</option>
-                                            <option value="w">Wynagrodzenie</option>
-                                            <option value="o">Odsetki bankowe</option>
-                                            <option value="s">Sprzedaż na Allegro</option>
-                                            <option value="i">Inne</option>
-                                    
+                                            <?php
+                                            require_once "loadIncomesCattegories.php";
+                                            ?>
                                         </select>
                                     </div>
                                     <div class="input-group mt-3">

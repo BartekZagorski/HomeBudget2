@@ -57,7 +57,12 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text px-2"><i class="icon-user"></i></span>
                                         </div>
-                                        <input type="text" name="login" id="login" class="form-control" placeholder="login" onfocus="this.placeholder=''" onblur="this.placeholder='login'" required>
+                                        <input type="text" name="login" id="login" class="form-control" placeholder="login" onfocus="this.placeholder=''" onblur="this.placeholder='login'" 
+                                        <?php
+                                            if (isset($_SESSION['badAttempt']))
+                                            echo 'value= "'.$_SESSION['badAttempt'].'"';
+                                        ?>
+                                        required>
                                     </div>
                                     <div class="input-group mt-3">
                                         <div class="input-group-prepend">
@@ -69,7 +74,7 @@
                                     <?php
                                         if (isset($_SESSION['badAttempt']))
                                         {
-                                            echo "<p> Niepoprawny login lub hasło </p>";
+                                            echo "<p class=\"mt-3 mb-0 text-danger small\"> Niepoprawny login lub hasło </p>";
                                             unset($_SESSION['badAttempt']);
                                         }
                                     ?>

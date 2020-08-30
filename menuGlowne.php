@@ -31,57 +31,8 @@
 <body>
 
 <?php    
-require_once "temp.php"; 
+require_once "headerAndNavbar.php"; 
 ?> 
-<!-- <header>
-        <div class="container-fluid">
-            <div class="row" style="min-height: 131px;">
-                <div class="col py-2 bg-primary">
-                    <h1 class="text-capitalize text-light text-center mb-0">
-                        <a href="index.php" id="logo"><i class="icon-home brand"></i><strong>HomeBudget</strong></a>
-                    </h1>
-                    <p class="small text-center my-0">
-                        Pieniądze to nie wszystko, ale wszystko bez pieniędzy to nic.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </header> -->
-
-    <nav class="navbar navbar-light bg-light p-0 navbar-expand-lg main-navbar">
-        <button type="button" class="navbar-toggler m-1 order-first" data-toggle="collapse" data-target="#navbarLinks">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse " id="navbarLinks">
-            <ul class="navbar-nav mr-auto">
-                <li class="navbar-item pt-2">
-                    <a href="menuGlowne.php" class="nav-link active"><i class="icon-home-1 mx-1"></i>Strona Główna</a>
-                </li>
-                <li class="navbar-item pt-2">
-                    <a href="dodajPrzychod.html" class="nav-link"><i class="icon-dollar mx-1"></i>Dodaj Przychód</a>
-                </li>
-                <li class="navbar-item pt-2">
-                    <a href="dodajWydatek.html" class="nav-link"><i class="icon-basket mx-1"></i>Dodaj Wydatek</a>
-                </li>
-                <li class="navbar-item pt-2">
-                    <a href="przegladajBilans.html" class="nav-link"><i class="icon-chart-bar mx-1"></i>Przeglądaj Bilans</a>
-                </li>
-                <li class="navbar-item pt-2">
-                    <a href="ustwienia.html" class="nav-link"><i class="icon-cog mx-1"></i>Ustawienia</a>
-                </li>
-                <li class="navbar-item pt-2">
-                    <a  href="logout.php" class="nav-link" id="logout-link"><i class="icon-logout mx-1"></i>Wyloguj się</a>
-                </li>
-            </ul>
-        </div>
-        <div class="navbar-item text-primary mr-3 pt-1">
-            <p class="m-1 pt-2"><i class="icon-user mr-1 mb-0"></i>Zalogowany jako: 
-        <?php
-            echo $_SESSION['login'];
-        ?>
-        </p>
-        </div>
-    </nav>
 
     <main>
         <article id="main-content" class="py-5 height-navbar">
