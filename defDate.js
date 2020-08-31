@@ -16,6 +16,4 @@ function getDate() {
   document.getElementById("date").value = today;
 }
 
-window.onload = function() {
-  getDate();
-};
+window.onload = getDate();
