@@ -61,12 +61,10 @@
                                         
                                         <select class="form-control" required>
 							
-                                            <option value="" disabled selected hidden>Wybierz Sposób Płatności</option>
-                                            
-                                            <option value="1">Gotówka</option>
-                                            <option value="2">Karta debetowa</option>
-                                            <option value="3">Karta kredytowa</option>
-                                           
+                                            <?php
+                                                require_once "loadPaymentMethods.php";
+                                            ?>
+
                                         </select>
                                     </div>
                                     <div class="input-group mt-3">

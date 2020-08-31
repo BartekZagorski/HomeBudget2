@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once "dbconnect.php";
 
 $query = $dbConnection->prepare('SELECT name FROM `incomes_cattegories_assigned_to_users` WHERE user_id = :loggedID');
@@ -12,6 +11,6 @@ echo '<option value="" disabled selected hidden>Wybierz Kategorię</option>"';
 $iter = 1;
 foreach ($incomesCattegories as $inCat)
 {
-    echo '<option value="'.$iter++.'">'.$inCat['name'].'</option>';
+    echo PHP_EOL.'<option value="'.$iter++.'">'.$inCat['name'].'</option>';
 }
 ?>
