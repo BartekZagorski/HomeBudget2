@@ -71,28 +71,9 @@
                                         
                                         <select class="form-control" required>
 							
-                                            <option value="" disabled selected hidden>Wybierz Kategorię</option>
-                                            
-                                            <option value="1">Jedzenie</option>
-                                            <option value="2">Mieszkanie</option>
-                                            <option value="3">Transport</option>
-                                            <option value="4">Telekomunikacja</option>
-
-                                            <option value="5">Opieka zdrowotna</option>
-                                            <option value="6">Ubranie</option>
-                                            <option value="7">Higiena</option>
-                                            <option value="8">Dzieci</option>
-
-                                            <option value="9">Rozrywka</option>
-                                            <option value="10">Wycieczka</option>
-                                            <option value="11">Szkolenia</option>
-                                            <option value="12">Książki</option>
-
-                                            <option value="13">Oszczędności</option>
-                                            <option value="14">Złota jesień</option>
-                                            <option value="15">Spłata długów</option>
-                                            <option value="16">Darowizna</option>
-                                            <option value="17">Inne wydatki</option>
+                                            <?php
+                                                require_once "loadExpensesCattegories.php";
+                                            ?>
                                            
                                         </select>
                                     </div>
@@ -104,7 +85,7 @@
                                     </div>
                                     <div class="d-flex justify-content-around">
                                         <button type="submit" class="btn btn-outline-success mt-3 py-1"><i class="icon-plus-circled"></i>dodaj</button>
-                                        <a href="menuGlowne.html" class="btn btn-outline-danger mt-3 py-1">
+                                        <a href="menuGlowne.php" class="btn btn-outline-danger mt-3 py-1">
                                             <i class="icon-cancel-circled"></i>anuluj
                                         </a>
                                     </div>

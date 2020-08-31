@@ -73,7 +73,7 @@
                                     </div>
                                     <div class="d-flex justify-content-around">
                                         <button type="submit" class="btn btn-outline-success mt-3"><i class="icon-plus-circled"></i>dodaj</button>
-                                        <a href="menuGlowne.html" class="btn btn-outline-danger mt-3">
+                                        <a href="menuGlowne.php" class="btn btn-outline-danger mt-3">
                                             <i class="icon-cancel-circled"></i>anuluj
                                         </a>
                                     </div>
