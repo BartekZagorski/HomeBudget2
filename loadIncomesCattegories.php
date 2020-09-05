@@ -8,9 +8,11 @@ $query -> execute();
 $incomesCattegories = $query -> fetchAll();
 
 echo '<option value="" disabled selected hidden>Wybierz Kategorię</option>"';
-$iter = 1;
 foreach ($incomesCattegories as $inCat)
 {
-    echo PHP_EOL.'<option value="'.$iter++.'">'.$inCat['name'].'</option>';
+    if (isset($_SESSION['allTestsPassed']) && isset($_SESSION['chosenCattegory']) && $_SESSION['chosenCattegory'] == $inCat['name'])
+    echo PHP_EOL.'<option value="'.$inCat['name'].'" selected>'.$inCat['name'].'</option>';
+    else
+    echo PHP_EOL.'<option value="'.$inCat['name'].'">'.$inCat['name'].'</option>';
 }
 ?>
