@@ -36,7 +36,38 @@ require_once "headerAndNavbar.php";
 
     <main>
         <article id="main-content" class="py-5 height-navbar">
-
+            <?php
+            if (isset($_SESSION['actionDone']))
+            {
+            echo
+                '<div class="container">
+                    <div class="row align-items-start justify-content-center">
+                        <div class="col-sm-7 col-md-6 col-lg-5 col-xl-4 mx-auto py-4">
+                            <div class="card border-primary">
+                                <div class="card-header bg-primary py-2 text-light text-center ">
+                                    <h3 class="h5 m-0">Sukces!</h3>
+                                </div>
+                                <div class="card-body border-primary py-3">';
+                                    if ($_SESSION['actionDone']==="addIncome")
+                                    {
+                                        echo '<p class="mt-1 mb-2 text-center">Przychód dodano pomyślnie.</p>';
+                                    }
+                                    else
+                                    {
+                                        echo '<p class="mt-1 mb-2 text-center">Wydatek dodano pomyślnie.</p>';
+                                    }
+                                    echo
+                                    '<div class="d-flex justify-content-center">
+                                        <a href="menuGlowne.php" class="btn btn-success pt-2 pb-1 px-4 my-1"><i class="icon-plus-circled mr-1"></i>OK</a>
+                                    </div>  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>';
+            unset($_SESSION['actionDone']);
+            }
+            ?>
         </article>
     </main>
 
