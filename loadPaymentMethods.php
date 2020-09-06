@@ -8,9 +8,10 @@ $query -> execute();
 $paymentMethods = $query -> fetchAll();
 
 echo '<option value="" disabled selected hidden>Wybierz Sposób Płatności</option>';
-$iter = 1;
 foreach ($paymentMethods as $payMet)
 {
-    echo PHP_EOL.'<option value="'.$iter++.'">'.$payMet['name'].'</option>';
+    if (isset($_SESSION['allTestsPassed']) && isset($_SESSION['chosenMethod']) && $_SESSION['chosenMethod'] == $payMet['name'])
+    echo PHP_EOL.'<option value="'.$payMet['name'].'" selected>'.$payMet['name'].'</option>';
+    else
+    echo PHP_EOL.'<option value="'.$payMet['name'].'">'.$payMet['name'].'</option>';
 }
-?>

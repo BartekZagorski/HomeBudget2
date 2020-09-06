@@ -77,6 +77,8 @@ $_SESSION['commentGiven'] = $commentGiven;
 
 $_SESSION['chosenCattegory'] = $_POST['cattegory'];
 
+$_SESSION['chosenMethod'] = $_POST['method'];
+
 if (strlen($commentGiven)>100)
 {
     $_SESSION['allTestsPassed'] = false;
@@ -85,7 +87,7 @@ if (strlen($commentGiven)>100)
 
 if (!$_SESSION['allTestsPassed'])
 {
-    header('Location: dodajPrzychod.php');
+    header('Location: dodajWydatek.php');
     exit();
 }
 else
@@ -94,16 +96,17 @@ else
     unset($_SESSION['dateGiven']);
     unset($_SESSION['chosenCattegory']);
     unset($_SESSION['commentGiven']);
+    unset($_SESSION['chosenMethod']);
 
     require_once "dbconnect.php";
 
     if (empty($_POST['comment']))
     {
-        $query = $dbConnection->prepare('INSERT INTO incomes SELECT NULL, :user_id, id, :amount, :date, NULL FROM incomes_cattegories_assigned_to_users WHERE name = :cattegory AND user_id = :user_id2');
+        $query = $dbConnection->prepare('INSERT INTO expenses SELECT NULL, :user_id, e.id, p.id, :amount, :date, NULL FROM expenses_cattegories_assigned_to_users as e, payment_method_assigned_to_user as p WHERE e.name = :cattegory AND e.user_id = :user_id2 AND p.name = :method AND p.user_id = :user_id3');
     }
     else
     {
-        $query = $dbConnection->prepare('INSERT INTO incomes SELECT NULL, :user_id, id, :amount, :date, :comment FROM incomes_cattegories_assigned_to_users WHERE name = :cattegory AND user_id = :user_id2');
+        $query = $dbConnection->prepare('INSERT INTO expenses SELECT NULL, :user_id, e.id, p.id, :amount, :date, :comment FROM expenses_cattegories_assigned_to_users as e, payment_method_assigned_to_user as p WHERE e.name = :cattegory AND e.user_id = :user_id2 AND p.name = :method AND p.user_id = :user_id3');
         $query->bindValue(':comment', $commentGiven, PDO::PARAM_STR);
     }
         $query->bindValue(':user_id', $_SESSION['loggedInUserId'], PDO::PARAM_INT);
@@ -111,13 +114,14 @@ else
         $query->bindValue(':date', $dateFromPost, PDO::PARAM_STR);
         $query->bindValue(':cattegory', $_POST['cattegory'], PDO::PARAM_STR);
         $query->bindValue(':user_id2', $_SESSION['loggedInUserId'], PDO::PARAM_INT);
+        $query->bindValue(':method', $_POST['method'], PDO::PARAM_STR);
+        $query->bindValue(':user_id3', $_SESSION['loggedInUserId'], PDO::PARAM_INT);
 
         $query->execute();
 
-        $_SESSION['actionDone'] = "addIncome";
+        $_SESSION['actionDone'] = "addExpense";
         header('Location: menuGlowne.php');
         exit();
 }
 
 ?>
-
