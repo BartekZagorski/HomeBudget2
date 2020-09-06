@@ -109,8 +109,22 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text px-2"><i class="icon-edit"></i></span>
                                         </div>
-                                        <input type="text" name="comment" id="comment" class="form-control" placeholder="komentarz" onfocus="this.placeholder=''" onblur="this.placeholder='komentarz'">
+                                        <input type="text" name="comment" id="comment" class="form-control" placeholder="komentarz" onfocus="this.placeholder=''" onblur="this.placeholder='komentarz'"
+                                        <?php
+                                            if (isset($_SESSION['allTestsPassed']) && !$_SESSION['allTestsPassed'])
+                                            {
+                                                echo 'value = "'.$_SESSION['commentGiven'].'"';
+                                            }    
+                                        ?>
+                                        >
                                     </div>
+                                    <?php
+                                        if (isset($_SESSION['error_comment']))
+                                        {
+                                            echo "<p class=\"mt-1 text-danger small\">{$_SESSION['error_comment']}</p>";
+                                            unset($_SESSION['error_comment']);
+                                        }
+                                    ?>
                                     <div class="d-flex justify-content-around">
                                         <button type="submit" class="btn btn-outline-success mt-3 py-1"><i class="icon-plus-circled"></i>dodaj</button>
                                         <a href="menuGlowne.php" class="btn btn-outline-danger mt-3 py-1">
