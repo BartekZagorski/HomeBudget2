@@ -69,7 +69,14 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text px-2"><i class="icon-calendar"></i></span>
                                         </div>
-                                        <input type="date" name="date" id="date" class="form-control" required>
+                                        <input type="date" name="date" id="date" class="form-control" 
+                                        <?php
+                                            if (isset($_SESSION['allTestsPassed']) && !$_SESSION['allTestsPassed'])
+                                            {
+                                                echo 'value = "'.$_SESSION['dateGiven'].'"';
+                                            }    
+                                        ?>
+                                        required>
                                     </div>
                                     <?php
                                         if (isset($_SESSION['error_date']))
@@ -91,7 +98,14 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text px-2"><i class="icon-edit"></i></span>
                                         </div>
-                                        <input type="text" name="comment" id="comment" class="form-control" placeholder="komentarz" onfocus="this.placeholder=''" onblur="this.placeholder='komentarz'">
+                                        <input type="text" name="comment" id="comment" class="form-control" placeholder="komentarz" onfocus="this.placeholder=''" onblur="this.placeholder='komentarz'"
+                                        <?php
+                                            if (isset($_SESSION['allTestsPassed']) && !$_SESSION['allTestsPassed'])
+                                            {
+                                                echo 'value = "'.$_SESSION['commentGiven'].'"';
+                                            }    
+                                        ?>
+                                        >
                                     </div>
                                     <?php
                                         if (isset($_SESSION['error_comment']))

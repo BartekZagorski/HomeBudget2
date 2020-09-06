@@ -44,22 +44,50 @@
                                 <h3 class="h5 m-0"><i class="icon-basket"></i>dodaj wydatek</h3>
                             </div>
                             <div class="card-body border-primary py-2">
-                                <form>
+                                <form action="addExpense.php" method="post">
                                     <div class="input-group mt-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text px-2"><i class="icon-money"></i></span>
                                         </div>
-                                        <input type="number" name="amount" id="amount" step="0.01" class="form-control" placeholder="podaj kwotę" onfocus="this.placeholder=''" onblur="this.placeholder='podaj kwotę'" required>
+                                        <input type="number" name="amount" id="amount" step="0.01" class="form-control" placeholder="podaj kwotę" onfocus="this.placeholder=''" onblur="this.placeholder='podaj kwotę'"
+                                            <?php 
+                                                if (isset($_SESSION['allTestsPassed']) && !$_SESSION['allTestsPassed'])
+                                                {
+                                                    echo 'value = "'.$_SESSION['given_amount'].'"';
+                                                }
+                                            ?>
+                                        required>
                                     </div>
+                                    <?php
+                                        if (isset($_SESSION['error_amount']))
+                                        {
+                                            echo "<p class=\"mt-1 text-danger small\">{$_SESSION['error_amount']}</p>";
+                                            unset($_SESSION['error_amount']);
+                                        }
+                                    ?>
                                     <div class="input-group mt-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text px-2"><i class="icon-calendar"></i></span>
                                         </div>
-                                        <input type="date" name="date" id="date" class="form-control" required>
+                                        <input type="date" name="date" id="date" class="form-control" 
+                                        <?php
+                                            if (isset($_SESSION['allTestsPassed']) && !$_SESSION['allTestsPassed'])
+                                            {
+                                                echo 'value = "'.$_SESSION['dateGiven'].'"';
+                                            }    
+                                        ?>
+                                        required>
                                     </div>
+                                    <?php
+                                        if (isset($_SESSION['error_date']))
+                                        {
+                                            echo "<p class=\"mt-1 text-danger small\">{$_SESSION['error_date']}</p>";
+                                            unset($_SESSION['error_date']);
+                                        }
+                                    ?>
                                     <div class="input-group mt-3">
                                         
-                                        <select class="form-control" required>
+                                        <select class="form-control" name="method" required>
 							
                                             <?php
                                                 require_once "loadPaymentMethods.php";
@@ -69,7 +97,7 @@
                                     </div>
                                     <div class="input-group mt-3">
                                         
-                                        <select class="form-control" required>
+                                        <select class="form-control" name="cattegory" required>
 							
                                             <?php
                                                 require_once "loadExpensesCattegories.php";
@@ -90,6 +118,9 @@
                                         </a>
                                     </div>
                                 </form>
+                                <?php
+									if (isset($_SESSION['allTestsPassed'])) unset($_SESSION['allTestsPassed']);
+								?>
                             </div>
                         </div>
                     </div>

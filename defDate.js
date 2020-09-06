@@ -13,7 +13,11 @@ function getDate() {
   } 
 
   today = yyyy + '-' + mm + '-' + dd;
-  document.getElementById("date").value = today;
+  if (document.getElementById("date").value == false)
+  {
+    document.getElementById("date").value = today;
+  }
+  
 }
 
 window.onload = function() {
