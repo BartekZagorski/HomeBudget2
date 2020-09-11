@@ -52,7 +52,7 @@
                             </button>
                             <div class="dropdown-menu dropdown-menu-right py-0">
                                 <button type="button" class="dropdown-item">Bieżący Miesiąc</button>
-                                <button type="button" class="dropdown-item">Poprzedni Miesiąc</button>
+                                <button type="button" class="dropdown-item" id="previousMonth">Poprzedni Miesiąc</button>
                                 <button type="button" class="dropdown-item">Bieżący Rok</button>
                                 <button type="button" class="dropdown-item" data-toggle="modal" data-target="#choose-period">Inny okres</button>
                             </div>
@@ -61,18 +61,27 @@
                     </div>
                 </div>
              
-                <div class="row">
+                <div class="row" id="browseStatement">
                     <div class="col px-0 my-2 mx-auto">
-                        <h2 class="h5 bg-primary text-light text-center py-2 mb-1"><i class="icon-chart-bar"></i>Przegląd bilansu z bieżącego miesiąca</h2>
+                        <h2 class="h5 bg-primary text-light text-center py-2 mb-1"><i class="icon-chart-bar"></i>Przegląd bilansu z bieżącego miesiąca </br> <?= "(od ".date('01-m-Y')." do ".date('t-m-Y').")";?></h2>
                         <div class="row p-2 m-0 border-bottom border-primary">
                             <div class="col-md-8 col-lg-6 px-1 d-flex align-items-center mx-auto">
                                 <table class="table table-dark table-bordered table-sm table-striped text-center table-hover mb-2">
                                     <thead class="bg-primary text-light">
                                         <tr><th colspan="3" class="text-uppercase bg-success"> Przychody według kategorii</th></tr>
-                                        <tr><th>Lp.</th><th>Kategoria</th><th>Kwota</th></tr>
-                                    </thead>
-                                    <tbody>
+
                                         <?php
+                                        if (empty($incomes))
+                                        {
+                                            echo '<tr><th class="font-weight-normal"> Brak przychodów w wybranym okresie !</th></tr>
+                                            </thead>';
+                                        }
+                                        else
+                                        {
+                                            echo '<tr><th>Lp.</th><th>Kategoria</th><th>Kwota</th></tr>
+                                            </thead>
+                                            <tbody>';
+                                        
                                             $iter = 1;
                                             $sum = 0;
                                             foreach ($incomes as $income)
@@ -80,7 +89,8 @@
                                                 echo "<tr><td>".$iter++.".</td><td>{$income["kategoria"]}</td><td>{$income["przychód"]}</td></tr>";
                                                 $sum+=$income["przychód"];
                                             }
-                                                echo "<tr><td>suma:</td><td></td><td>$sum</td></tr>";
+                                            echo "<tr><td>suma:</td><td></td><td>".number_format($sum, 2)."</td></tr>";
+                                        }
                                         ?>
                                     </tbody>
                                 </table>  
@@ -89,18 +99,26 @@
                                 <table class="table table-dark table-bordered table-sm table-striped text-center table-hover mb-2">
                                     <thead class="bg-primary text-light">
                                         <tr><th colspan="3" class="text-uppercase bg-success"> Wydatki według kategorii</th></tr>
-                                        <tr><th>Lp.</th><th>Kategoria</th><th>Kwota</th></tr>
-                                    </thead>
-                                    <tbody>
                                         <?php
-                                            $iter = 1;
-                                            $sum = 0;
-                                            foreach ($expenses as $expense)
+                                            if (empty($expenses))
                                             {
-                                                echo "<tr><td>".$iter++.".</td><td>{$expense["kategoria"]}</td><td>{$expense["wydatek"]}</td></tr>";
-                                                $sum+=$expense["wydatek"];
+                                                echo '<tr><th class="font-weight-normal"> Brak wydatków w wybranym okresie !</th></tr>
+                                                </thead>';
                                             }
-                                                echo "<tr><td>suma:</td><td></td><td>$sum</td></tr>";
+                                            else
+                                            {
+                                                echo '<tr><th>Lp.</th><th>Kategoria</th><th>Kwota</th></tr>
+                                                </thead>
+                                                <tbody>';
+                                                $iter = 1;
+                                                $sum = 0;
+                                                foreach ($expenses as $expense)
+                                                {
+                                                    echo "<tr><td>".$iter++.".</td><td>{$expense["kategoria"]}</td><td>{$expense["wydatek"]}</td></tr>";
+                                                    $sum+=$expense["wydatek"];
+                                                }
+                                                echo "<tr><td>suma:</td><td></td><td>".number_format($sum, 2)."</td></tr>";
+                                            }
                                         ?>
                                     </tbody>
                                 </table>  
@@ -113,10 +131,19 @@
                                 <table class="table table-dark table-bordered table-sm table-striped text-center table-hover mb-2">
                                     <thead class="bg-primary text-light">
                                         <tr><th colspan="5" class="text-uppercase bg-success"> Przychody zestawienie szczegółowe</th></tr>
-                                        <tr><th scope="col">Lp.</th><th scope="col">Kwota</th><th scope="col">Kategoria</th><th scope="col">Data</th><th scope="col">Komentarz</th></tr>
-                                    </thead>
-                                    <tbody>
                                         <?php
+                                        if (empty($incomesAll))
+                                        {
+                                            echo '<tr><th class="font-weight-normal"> Brak przychodów w wybranym okresie !</th></tr>
+                                            </thead>';
+                                        }
+                                        else
+                                        {
+                                            echo
+                                            '<tr><th scope="col">Lp.</th><th scope="col">Kwota</th><th scope="col">Kategoria</th><th scope="col">Data</th><th scope="col">Komentarz</th></tr>
+                                            </thead>
+                                            <tbody>';
+                                        
                                             $iter = 1;
                                             $sum = 0;
                                             foreach ($incomesAll as $income)
@@ -124,7 +151,8 @@
                                                 echo "<tr><td>".$iter++.".</td><td>{$income["amount"]}</td><td>{$income["name"]}</td></td><td>{$income["date_of_income"]}</td></td><td>{$income["income_comment"]}</td></tr>";
                                                 $sum+=$income["amount"];
                                             }
-                                                echo "<tr><td>suma:</td><td>$sum</td><td></td><td></td><td></td></tr>";
+                                            echo "<tr><td>suma:</td><td>".number_format($sum, 2)."</td><td></td><td></td><td></td></tr>";
+                                        }
                                         ?>
                                     </tbody>
                                 </table>  
@@ -134,10 +162,19 @@
                                     <table class="table table-dark table-bordered table-sm table-striped text-center table-hover mb-2">
                                         <thead class="bg-primary text-light">
                                             <tr><th colspan="6" class="text-uppercase bg-success"> Wydatki zestawienie szczegółowe</th></tr>
-                                            <tr><th scope="col">Lp.</th><th scope="col">Kwota</th><th scope="col">Kategoria</th><th scope="col">Metoda Płatnosci</th><th scope="col">Data</th><th scope="col">Komentarz</th></tr>
-                                        </thead>
-                                        <tbody>
                                             <?php
+                                            if (empty($expensesAll))
+                                            {
+                                                echo '<tr><th class="font-weight-normal"> Brak wydatków w wybranym okresie !</th></tr>
+                                                </thead>';
+                                            }
+                                            else
+                                            {
+                                            echo 
+                                                '<tr><th scope="col">Lp.</th><th scope="col">Kwota</th><th scope="col">Kategoria</th><th scope="col">Metoda Płatnosci</th><th scope="col">Data</th><th scope="col">Komentarz</th></tr>
+                                                </thead>
+                                                <tbody>';
+                                            
                                                 $iter = 1;
                                                 $sum = 0;
                                                 foreach ($expensesAll as $expense)
@@ -145,7 +182,8 @@
                                                     echo "<tr><td>".$iter++.".</td><td>{$expense["amount"]}</td><td>{$expense["1"]}</td><td>{$expense["2"]}</td></td><td>{$expense["date_of_expense"]}</td></td><td>{$expense["expense_comment"]}</td></tr>";
                                                     $sum+=$expense["amount"];
                                                 }
-                                                    echo "<tr><td>suma:</td><td>$sum</td><td></td><td></td><td></td><td></td></tr>";
+                                                    echo "<tr><td>suma:</td><td>".number_format($sum, 2)."</td><td></td><td></td><td></td><td></td></tr>";
+                                            }
                                             ?>
                                         </tbody>
                                     </table>
@@ -199,6 +237,15 @@
     <script src="./js/jquery-3.5.1.min.js"></script>
     <!--bootstrap js-->
     <script src="./js/bootstrap.bundle.min.js"></script>
+
+    <script>
+            $(document).ready(function(){
+                $("#previousMonth").click(function()
+                    {
+                        $("#browseStatement").load("browseStatementOfPreviousMonth.php");
+                    });
+                });
+    </script>
 
 </body>
 </html>
