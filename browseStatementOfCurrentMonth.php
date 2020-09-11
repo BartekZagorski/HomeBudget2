@@ -16,12 +16,16 @@ $expensesAccordingToCattegories -> bindValue(':begin', $firstDayOfThisMonth, PDO
 $expensesAccordingToCattegories -> bindValue(':end', $lastDayOfThisMonth, PDO::PARAM_STR);
 $expensesAccordingToCattegories -> execute();
 
-$incomesFully = $dbConnection -> prepare('SELECT amount, name, date_of_income, income_comment FROM incomes_cattegories_assigned_to_users as c, incomes WHERE incomes.user_id = :user_id AND income_cattegory_assigned_to_user_id = c.id ORDER BY date_of_income DESC, amount DESC');
+$incomesFully = $dbConnection -> prepare('SELECT amount, name, date_of_income, income_comment FROM incomes_cattegories_assigned_to_users as c, incomes WHERE incomes.user_id = :user_id AND income_cattegory_assigned_to_user_id = c.id AND date_of_income BETWEEN :begin AND :end ORDER BY date_of_income DESC, amount DESC');
 $incomesFully -> bindValue(':user_id', $_SESSION['loggedInUserId'], PDO::PARAM_INT);
+$incomesFully -> bindValue(':begin', $firstDayOfThisMonth, PDO::PARAM_STR);
+$incomesFully -> bindValue(':end', $lastDayOfThisMonth, PDO::PARAM_STR);
 $incomesFully -> execute();
 
-$expensesFully = $dbConnection -> prepare('SELECT amount, c.name, p.name, date_of_expense, expense_comment FROM expenses_cattegories_assigned_to_users as c, payment_method_assigned_to_user as p, expenses WHERE expenses.user_id = :user_id AND expense_cattegory_assigned_to_user_id = c.id AND payment_method_assigned_to_user_id = p.id ORDER BY date_of_expense DESC, amount DESC');
+$expensesFully = $dbConnection -> prepare('SELECT amount, c.name, p.name, date_of_expense, expense_comment FROM expenses_cattegories_assigned_to_users as c, payment_method_assigned_to_user as p, expenses WHERE expenses.user_id = :user_id AND expense_cattegory_assigned_to_user_id = c.id AND payment_method_assigned_to_user_id = p.id AND date_of_expense BETWEEN :begin AND :end ORDER BY date_of_expense DESC, amount DESC');
 $expensesFully -> bindValue(':user_id', $_SESSION['loggedInUserId'], PDO::PARAM_INT);
+$expensesFully -> bindValue(':begin', $firstDayOfThisMonth, PDO::PARAM_STR);
+$expensesFully -> bindValue(':end', $lastDayOfThisMonth, PDO::PARAM_STR);
 $expensesFully -> execute();
 
 ?>
