@@ -1,7 +1,7 @@
 <?php
 if (!isset($_SESSION['loggedInUserId'])) session_start();
-$periodBegin = date("Y-m-01");
-$periodEnd = date("Y-m-t");
+$periodBegin = $_POST['beginDate'];
+$periodEnd = $_POST['endDate'];
 
 require_once "dbconnect.php";
 
@@ -32,7 +32,7 @@ $expensesFully -> execute();
 echo
 '
     <div class="col px-0 my-2 mx-auto">
-        <h2 class="h5 bg-primary text-light text-center py-2 mb-1"><i class="icon-chart-bar"></i>Przegląd bilansu z bieżącego miesiąca </br> (od '.date("01-m-Y").' do '.date("t-m-Y").')</h2>
+        <h2 class="h5 bg-primary text-light text-center py-2 mb-1"><i class="icon-chart-bar"></i>Przegląd bilansu z wybranego okresu </br> (od '.date('d-m-Y', strtotime($_POST['beginDate'])).' do '.date('d-m-Y', strtotime($_POST['endDate'])).')</h2>
         <div class="row p-2 m-0 border-bottom border-primary">
             <div class="col-md-8 col-lg-6 px-1 d-flex align-items-center mx-auto">
                 <table class="table table-dark table-bordered table-sm table-striped text-center table-hover mb-2">
@@ -162,7 +162,7 @@ echo
                 </div> 
             </div>
         
-        </div>                    
+        </div>
         <div class="row p-2 m-0 border-bottom border-primary">
             <div class="col-md-10 col-lg-8 px-1 mx-auto">
                 <div>
@@ -172,7 +172,7 @@ echo
                     else echo '<p class="bg-primary text-center text-light p-1 mb-1">Uwaga! Popadasz w długi!</p>';
             echo    '</div>
             </div>
-        </div> 
+        </div>                  
     </div>
 ';
 ?>
