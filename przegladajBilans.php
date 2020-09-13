@@ -4,14 +4,6 @@
         header('Location: index.php');
         exit();
     }
-
-
-    require_once "browseStatementOfCurrentMonth.php";
-
-    $incomes = $incomesAccordingToCattegories->fetchAll();
-    $expenses = $expensesAccordingToCattegories->fetchAll();
-    $incomesAll = $incomesFully->fetchAll();
-    $expensesAll = $expensesFully->fetchAll();
 ?>
 
 <!DOCTYPE html>
@@ -51,9 +43,9 @@
                                 wybierz okres
                             </button>
                             <div class="dropdown-menu dropdown-menu-right py-0">
-                                <button type="button" class="dropdown-item">Bieżący Miesiąc</button>
+                                <button type="button" class="dropdown-item" id="currentMonth">Bieżący Miesiąc</button>
                                 <button type="button" class="dropdown-item" id="previousMonth">Poprzedni Miesiąc</button>
-                                <button type="button" class="dropdown-item">Bieżący Rok</button>
+                                <button type="button" class="dropdown-item" id="currentYear">Bieżący Rok</button>
                                 <button type="button" class="dropdown-item" data-toggle="modal" data-target="#choose-period">Inny okres</button>
                             </div>
                         </div>
@@ -62,138 +54,11 @@
                 </div>
              
                 <div class="row" id="browseStatement">
-                    <div class="col px-0 my-2 mx-auto">
-                        <h2 class="h5 bg-primary text-light text-center py-2 mb-1"><i class="icon-chart-bar"></i>Przegląd bilansu z bieżącego miesiąca </br> <?= "(od ".date('01-m-Y')." do ".date('t-m-Y').")";?></h2>
-                        <div class="row p-2 m-0 border-bottom border-primary">
-                            <div class="col-md-8 col-lg-6 px-1 d-flex align-items-center mx-auto">
-                                <table class="table table-dark table-bordered table-sm table-striped text-center table-hover mb-2">
-                                    <thead class="bg-primary text-light">
-                                        <tr><th colspan="3" class="text-uppercase bg-success"> Przychody według kategorii</th></tr>
-
-                                        <?php
-                                        if (empty($incomes))
-                                        {
-                                            echo '<tr><th class="font-weight-normal"> Brak przychodów w wybranym okresie !</th></tr>
-                                            </thead>';
-                                        }
-                                        else
-                                        {
-                                            echo '<tr><th>Lp.</th><th>Kategoria</th><th>Kwota</th></tr>
-                                            </thead>
-                                            <tbody>';
-                                        
-                                            $iter = 1;
-                                            $sum = 0;
-                                            foreach ($incomes as $income)
-                                            {
-                                                echo "<tr><td>".$iter++.".</td><td>{$income["kategoria"]}</td><td>{$income["przychód"]}</td></tr>";
-                                                $sum+=$income["przychód"];
-                                            }
-                                            echo "<tr><td>suma:</td><td></td><td>".number_format($sum, 2)."</td></tr>";
-                                        }
-                                        ?>
-                                    </tbody>
-                                </table>  
-                            </div>
-                            <div class="col-md-8 col-lg-6 px-1 d-flex align-items-center mx-auto">
-                                <table class="table table-dark table-bordered table-sm table-striped text-center table-hover mb-2">
-                                    <thead class="bg-primary text-light">
-                                        <tr><th colspan="3" class="text-uppercase bg-success"> Wydatki według kategorii</th></tr>
-                                        <?php
-                                            if (empty($expenses))
-                                            {
-                                                echo '<tr><th class="font-weight-normal"> Brak wydatków w wybranym okresie !</th></tr>
-                                                </thead>';
-                                            }
-                                            else
-                                            {
-                                                echo '<tr><th>Lp.</th><th>Kategoria</th><th>Kwota</th></tr>
-                                                </thead>
-                                                <tbody>';
-                                                $iter = 1;
-                                                $sum = 0;
-                                                foreach ($expenses as $expense)
-                                                {
-                                                    echo "<tr><td>".$iter++.".</td><td>{$expense["kategoria"]}</td><td>{$expense["wydatek"]}</td></tr>";
-                                                    $sum+=$expense["wydatek"];
-                                                }
-                                                echo "<tr><td>suma:</td><td></td><td>".number_format($sum, 2)."</td></tr>";
-                                            }
-                                        ?>
-                                    </tbody>
-                                </table>  
-                            </div>
-                        
-                        </div>
-
-                        <div class="row p-2 m-0 border-bottom border-primary">
-                            <div class="col-md-10 col-lg-8 px-1 d-flex align-items-center mx-auto">
-                                <table class="table table-dark table-bordered table-sm table-striped text-center table-hover mb-2">
-                                    <thead class="bg-primary text-light">
-                                        <tr><th colspan="5" class="text-uppercase bg-success"> Przychody zestawienie szczegółowe</th></tr>
-                                        <?php
-                                        if (empty($incomesAll))
-                                        {
-                                            echo '<tr><th class="font-weight-normal"> Brak przychodów w wybranym okresie !</th></tr>
-                                            </thead>';
-                                        }
-                                        else
-                                        {
-                                            echo
-                                            '<tr><th scope="col">Lp.</th><th scope="col">Kwota</th><th scope="col">Kategoria</th><th scope="col">Data</th><th scope="col">Komentarz</th></tr>
-                                            </thead>
-                                            <tbody>';
-                                        
-                                            $iter = 1;
-                                            $sum = 0;
-                                            foreach ($incomesAll as $income)
-                                            {
-                                                echo "<tr><td>".$iter++.".</td><td>{$income["amount"]}</td><td>{$income["name"]}</td></td><td>{$income["date_of_income"]}</td></td><td>{$income["income_comment"]}</td></tr>";
-                                                $sum+=$income["amount"];
-                                            }
-                                            echo "<tr><td>suma:</td><td>".number_format($sum, 2)."</td><td></td><td></td><td></td></tr>";
-                                        }
-                                        ?>
-                                    </tbody>
-                                </table>  
-                            </div>
-                            <div class="col-md-10 col-lg-8 px-1 d-flex align-items-center mx-auto">
-                                <div class="table-responsive">
-                                    <table class="table table-dark table-bordered table-sm table-striped text-center table-hover mb-2">
-                                        <thead class="bg-primary text-light">
-                                            <tr><th colspan="6" class="text-uppercase bg-success"> Wydatki zestawienie szczegółowe</th></tr>
-                                            <?php
-                                            if (empty($expensesAll))
-                                            {
-                                                echo '<tr><th class="font-weight-normal"> Brak wydatków w wybranym okresie !</th></tr>
-                                                </thead>';
-                                            }
-                                            else
-                                            {
-                                            echo 
-                                                '<tr><th scope="col">Lp.</th><th scope="col">Kwota</th><th scope="col">Kategoria</th><th scope="col">Metoda Płatnosci</th><th scope="col">Data</th><th scope="col">Komentarz</th></tr>
-                                                </thead>
-                                                <tbody>';
-                                            
-                                                $iter = 1;
-                                                $sum = 0;
-                                                foreach ($expensesAll as $expense)
-                                                {
-                                                    echo "<tr><td>".$iter++.".</td><td>{$expense["amount"]}</td><td>{$expense["1"]}</td><td>{$expense["2"]}</td></td><td>{$expense["date_of_expense"]}</td></td><td>{$expense["expense_comment"]}</td></tr>";
-                                                    $sum+=$expense["amount"];
-                                                }
-                                                    echo "<tr><td>suma:</td><td>".number_format($sum, 2)."</td><td></td><td></td><td></td><td></td></tr>";
-                                            }
-                                            ?>
-                                        </tbody>
-                                    </table>
-                                </div> 
-                            </div>
-                        
-                        </div>                    
-
-                    </div>
+                    <?php    
+                        require_once "browseStatementOfCurrentMonth.php";
+                    ?>    
                 </div>
+                
             </div>
         </article>
     </main>
@@ -208,13 +73,13 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form id="anotherPeriod">
                         <label class="control-label mb-1">Wybierz datę początkową:</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text px-2"><i class="icon-calendar"></i></span>
                             </div>
-                            <input type="date" name="start-date" id="start-date" class="form-control" required>
+                            <input type="date" name="start-date" id="start-date" class="form-control" min="2000-01-01" required>
                         </div>
                         <label class="control-label mb-1">Wybierz datę końcową:</label>
                         <div class="input-group mb-3">
@@ -240,11 +105,50 @@
 
     <script>
             $(document).ready(function(){
-                $("#previousMonth").click(function()
+                    $("#currentMonth").click(function()
+                    {
+                        $("#browseStatement").load("browseStatementOfCurrentMonth.php");
+                    });
+
+                    $("#previousMonth").click(function()
                     {
                         $("#browseStatement").load("browseStatementOfPreviousMonth.php");
                     });
+
+                    $("#currentYear").click(function()
+                    {
+                        $("#browseStatement").load("browseStatementOfCurrentYear.php");
+                    });
+
+                    $(document).on('submit', '#anotherPeriod',function()
+                    {
+                        $("#browseStatement").load("browseStatementOfAnotherPeriod.php",
+                            {
+                                beginDate: $("#start-date").val(),
+                                endDate: $("#end-date").val()
+                            });
+                        $('#choose-period').modal('hide');
+                        return false;
+                    });
+
+                    let today = new Date();
+                    let date = new Date(today.getFullYear(), today.getMonth()+1, 0);
+                    let yr = date.getFullYear();
+                    let month = date.getMonth() < 9 ? '0' + (date.getMonth()+1) : date.getMonth()+1;
+                    let day = date.getDate()  < 10 ? '0' + date.getDate()  : date.getDate();
+                    let lastDayOfThisMonth = yr + '-' + month + '-' + day;
+                    $("#start-date").attr("max", lastDayOfThisMonth);
+                    $("#end-date").attr("max", lastDayOfThisMonth);
+
+                    $("#start-date").change(function(){
+                        $("#end-date").attr("min", $("#start-date").val());
+                    });
+                    $("#end-date").change(function(){
+                        $("#start-date").attr("max", $("#end-date").val());
+                    });
                 });
+            
+
     </script>
 
 </body>
