@@ -58,6 +58,9 @@
                         require_once "browseStatementOfCurrentMonth.php";
                     ?>    
                 </div>
+                <div class="row mx-auto">
+                    <div class="col" id="piechart"></div>
+                </div>
                 
             </div>
         </article>
@@ -107,17 +110,17 @@
             $(document).ready(function(){
                     $("#currentMonth").click(function()
                     {
-                        $("#browseStatement").load("browseStatementOfCurrentMonth.php");
+                        $("#browseStatement").load("browseStatementOfCurrentMonth.php", function(){drawChart();});
                     });
 
                     $("#previousMonth").click(function()
                     {
-                        $("#browseStatement").load("browseStatementOfPreviousMonth.php");
+                        $("#browseStatement").load("browseStatementOfPreviousMonth.php", function(){drawChart();});
                     });
 
                     $("#currentYear").click(function()
                     {
-                        $("#browseStatement").load("browseStatementOfCurrentYear.php");
+                        $("#browseStatement").load("browseStatementOfCurrentYear.php", function(){drawChart();});
                     });
 
                     $(document).on('submit', '#anotherPeriod',function()
@@ -126,7 +129,7 @@
                             {
                                 beginDate: $("#start-date").val(),
                                 endDate: $("#end-date").val()
-                            });
+                            }, function(){drawChart();});
                         $('#choose-period').modal('hide');
                         return false;
                     });
@@ -147,9 +150,66 @@
                         $("#start-date").attr("max", $("#end-date").val());
                     });
                 });
-            
+                $(window).resize(function(){
+                    drawChart();
+                });
 
     </script>
+
+
+
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script type="text/javascript">
+// Load google charts
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+// Draw the chart and set the chart values
+function drawChart() {
+    let expensesAccordingToCattegories = [];
+    let dataFromTable = document.getElementById("expenses-according-to-cattegories");
+    if (!dataFromTable)
+    {
+        $("#piechart").html("");
+    }
+    else
+    {
+        let lengthOfDataFromTable = dataFromTable.rows.length;
+
+        for (i=0; i<lengthOfDataFromTable-1; i++)
+        {
+            var row = dataFromTable.rows.item(i).cells;
+            var tab = [];
+
+            for (j=1; j < row.length; j++)
+            {
+                if (j%2 == 0)
+                tab.push(parseFloat(row.item(j).innerText.trim()));
+                else
+                tab.push(row.item(j).innerText.trim());
+            }
+            expensesAccordingToCattegories.push(tab);
+        }
+        let data = google.visualization.arrayToDataTable(expensesAccordingToCattegories, true);
+
+        // Optional; add a title and set the width and height of the chart
+        let options = {'title':'Wydatki według kategorii', 'fontFamily': 'Josefin Sans', 'width': '100%', 'height': 600, 'backgroundColor': {
+                fill:'none'}, 'titleTextStyle': {
+                color: 'white', fontSize: 22, fontName: 'Josefin Sans'}, 'legend': {
+                'textStyle': {
+                    color: 'white',
+                    fontName: 'Josefin Sans'
+                }}, 'pieSliceTextStyle': {fontName: 'Josefin Sans'},
+                    'sliceVisibilityThreshold': 0};
+
+        // Display the chart inside the <div> element with id="piechart"
+        let chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+    }
+}
+</script>
 
 </body>
 </html>
