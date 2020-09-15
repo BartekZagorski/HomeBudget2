@@ -79,7 +79,7 @@ echo
                             {
                                 echo '<tr><th>Lp.</th><th>Kategoria</th><th>Kwota</th></tr>
                                 </thead>
-                                <tbody>';
+                                <tbody id="expenses-according-to-cattegories">';
                                 $iter = 1;
                                 $sum = 0;
                                 foreach ($expenses as $expense)

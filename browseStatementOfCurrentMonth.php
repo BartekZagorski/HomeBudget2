@@ -65,7 +65,7 @@ echo
                 </table>  
             </div>
             <div class="col-md-8 col-lg-6 px-1 d-flex align-items-center mx-auto">
-                <table class="table table-dark table-bordered table-sm table-striped text-center table-hover mb-2">
+                <table id="myTable" class="table table-dark table-bordered table-sm table-striped text-center table-hover mb-2">
                     <thead class="bg-primary text-light">
                         <tr><th colspan="3" class="text-uppercase bg-success"> Wydatki według kategorii</th></tr>';
                         
@@ -79,7 +79,7 @@ echo
                             {
                                 echo '<tr><th>Lp.</th><th>Kategoria</th><th>Kwota</th></tr>
                                 </thead>
-                                <tbody>';
+                                <tbody id="expenses-according-to-cattegories">';
                                 $iter = 1;
                                 $sum = 0;
                                 foreach ($expenses as $expense)
