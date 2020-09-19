@@ -99,7 +99,7 @@ echo
         <div class="row p-2 m-0 border-bottom border-primary">
             <div class="col-md-10 col-lg-8 px-1 d-flex align-items-center mx-auto">
                 <div class="table-responsive text-nowrap">
-                    <table class="table table-dark table-bordered table-sm table-striped text-center table-hover mb-2 moja-klasa">
+                    <table class="table table-dark table-bordered table-sm table-striped text-center table-hover mb-2">
                         <thead class="bg-primary text-light">
                             <tr><th colspan="5" class="text-uppercase bg-success"> Przychody zestawienie szczegółowe</th></tr>';
                             
