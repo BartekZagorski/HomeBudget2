@@ -57,5 +57,24 @@ body{
 }
 
 .width{
-    min-width: 46px;
+    min-width: 46px !important;
+}
+.moja-klasa{
+    min-width: 800px !important;
+}
+
+@media screen and (max-width: 576px) {
+    #logo{
+        font-size: calc(7vw);
+    }
+    .brand{
+        font-size: calc(14vw);
+    }
+    header p.small{
+        font-size: calc(2.2vw);
+    }
+    header .row{
+        min-height: 0px !important;
+    }
+
 }
