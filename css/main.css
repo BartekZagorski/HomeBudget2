@@ -59,9 +59,6 @@ body{
 .width{
     min-width: 46px !important;
 }
-.moja-klasa{
-    min-width: 800px !important;
-}
 
 @media screen and (max-width: 576px) {
     #logo{

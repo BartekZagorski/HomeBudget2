@@ -5,31 +5,31 @@ function setActive ($numberOfNavbarItem)
     $option = $_SERVER['REQUEST_URI'];
     switch ($option)
     {
-        case "/Homebudget2/menuGlowne.php":
+        case "/HomeBudget2/menuGlowne.php":
             {
                 if ($numberOfNavbarItem == 1)
                 return "active";
             }
         break;
-        case "/Homebudget2/dodajPrzychod.php":
+        case "/HomeBudget2/dodajPrzychod.php":
             {
                 if ($numberOfNavbarItem == 2)
                 return "active";
             }
         break;
-        case "/Homebudget2/dodajWydatek.php":
+        case "/HomeBudget2/dodajWydatek.php":
             {
                 if ($numberOfNavbarItem == 3)
                 return "active";
             }
         break;
-        case "/Homebudget2/przegladajBilans.php":
+        case "/HomeBudget2/przegladajBilans.php":
             {
                 if ($numberOfNavbarItem == 4)
                 return "active";
             }
         break;
-        case "/Homebudget2/ustawienia.php":
+        case "/HomeBudget2/ustawienia.php":
             {
                 if ($numberOfNavbarItem == 5)
                 return "active";
