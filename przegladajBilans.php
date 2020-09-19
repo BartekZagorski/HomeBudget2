@@ -195,13 +195,16 @@ function drawChart() {
         let data = google.visualization.arrayToDataTable(expensesAccordingToCattegories, true);
 
         // Optional; add a title and set the width and height of the chart
-        let options = {'title':'Wydatki według kategorii', 'fontFamily': 'Josefin Sans', 'width': '100%', 'height': 600, 'backgroundColor': {
+        let options = {'title':'Wydatki według kategorii', 'fontFamily': 'Josefin Sans', 'height': '500', 'is3D': 'true', 'backgroundColor': {
                 fill:'none'}, 'titleTextStyle': {
                 color: 'white', fontSize: 22, fontName: 'Josefin Sans'}, 'legend': {
                 'textStyle': {
                     color: 'white',
                     fontName: 'Josefin Sans'
-                }}, 'pieSliceTextStyle': {fontName: 'Josefin Sans'},
+                }, 
+                position: 'bottom',
+                alignment: 'center'}, 
+                'pieSliceTextStyle': {fontName: 'Josefin Sans'},
                     'sliceVisibilityThreshold': 0};
 
         // Display the chart inside the <div> element with id="piechart"

@@ -98,38 +98,40 @@ echo
 
         <div class="row p-2 m-0 border-bottom border-primary">
             <div class="col-md-10 col-lg-8 px-1 d-flex align-items-center mx-auto">
-                <table class="table table-dark table-bordered table-sm table-striped text-center table-hover mb-2">
-                    <thead class="bg-primary text-light">
-                        <tr><th colspan="5" class="text-uppercase bg-success"> Przychody zestawienie szczegółowe</th></tr>';
-                        
-                        $incomes = $incomesFully->fetchAll();
-                        $incomesSum = 0;
-                        if (empty($incomes))
-                        {
-                            echo '<tr><th class="font-weight-normal"> Brak przychodów w wybranym okresie !</th></tr>
-                            </thead>';
-                        }
-                        else
-                        {
-                            echo
-                            '<tr><th scope="col">Lp.</th><th scope="col">Kwota</th><th scope="col">Kategoria</th><th scope="col">Data</th><th scope="col">Komentarz</th></tr>
-                            </thead>
-                            <tbody>';
-                        
-                            $iter = 1;
-                            foreach ($incomes as $income)
+                <div class="table-responsive text-nowrap">   
+                    <table class="table table-dark table-bordered table-sm table-striped text-center table-hover mb-2">
+                        <thead class="bg-primary text-light">
+                            <tr><th colspan="5" class="text-uppercase bg-success"> Przychody zestawienie szczegółowe</th></tr>';
+                            
+                            $incomes = $incomesFully->fetchAll();
+                            $incomesSum = 0;
+                            if (empty($incomes))
                             {
-                                echo "<tr><td>".$iter++.".</td><td>{$income["amount"]}</td><td>{$income["name"]}</td></td><td>{$income["date_of_income"]}</td></td><td>{$income["income_comment"]}</td></tr>";
-                                $incomesSum+=$income["amount"];
+                                echo '<tr><th class="font-weight-normal"> Brak przychodów w wybranym okresie !</th></tr>
+                                </thead>';
                             }
-                            echo "<tr><td>suma:</td><td>".number_format($incomesSum, 2)."</td><td></td><td></td><td></td></tr>";
-                        }
-                        
-                echo    '</tbody>
-                </table>  
+                            else
+                            {
+                                echo
+                                '<tr><th scope="col">Lp.</th><th scope="col">Kwota</th><th scope="col">Kategoria</th><th scope="col">Data</th><th scope="col">Komentarz</th></tr>
+                                </thead>
+                                <tbody>';
+                            
+                                $iter = 1;
+                                foreach ($incomes as $income)
+                                {
+                                    echo "<tr><td>".$iter++.".</td><td>{$income["amount"]}</td><td>{$income["name"]}</td></td><td>{$income["date_of_income"]}</td></td><td>{$income["income_comment"]}</td></tr>";
+                                    $incomesSum+=$income["amount"];
+                                }
+                                echo "<tr><td>suma:</td><td>".number_format($incomesSum, 2)."</td><td></td><td></td><td></td></tr>";
+                            }
+                            
+                    echo    '</tbody>
+                    </table>
+                </div>      
             </div>
             <div class="col-md-10 col-lg-8 px-1 d-flex align-items-center mx-auto">
-                <div class="table-responsive">
+                <div class="table-responsive text-nowrap">
                     <table class="table table-dark table-bordered table-sm table-striped text-center table-hover mb-2">
                         <thead class="bg-primary text-light">
                             <tr><th colspan="6" class="text-uppercase bg-success"> Wydatki zestawienie szczegółowe</th></tr>';
